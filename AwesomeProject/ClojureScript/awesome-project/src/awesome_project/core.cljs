@@ -18,7 +18,8 @@
 
 (def Swiper (js/require "react-native-swiper/dist/index"))
 (defn swiper [opts & children]
-  (apply js/React.createElement Swiper (clj->js opts) children))
+  (apply js/React.createElement
+    Swiper (clj->js opts) children))
 
 ;; Set up our Om UI
 
@@ -26,25 +27,27 @@
 
 (def wrapper-style {})
 
-(def slide1-style {:flex            1
-                   :justifyContent  "center"
-                   :alignItems      "center"
-                   :backgroundColor "#9DD6EB"})
+(def slide-base-style
+  {:flex           1
+   :justifyContent "center"
+   :alignItems     "center"})
 
-(def slide2-style {:flex            1
-                   :justifyContent  "center"
-                   :alignItems      "center"
-                   :backgroundColor "#97CAE5"})
+(def slide1-style
+  (assoc slide-base-style
+    :backgroundColor "#9DD6EB"))
 
-(def slide3-style {:flex            1
-                   :justifyContent  "center"
-                   :alignItems      "center"
-                   :backgroundColor "#92BBD9"})
+(def slide2-style
+  (assoc slide-base-style
+    :backgroundColor "#97CAE5"))
 
+(def slide3-style
+  (assoc slide-base-style
+    :backgroundColor "#92BBD9"))
 
-(def text-style {:color      "#fff"
-                 :fontSize   30
-                 :fontWeight "bold"})
+(def text-style
+  {:color      "#fff"
+   :fontSize   30
+   :fontWeight "bold"})
 
 (defn widget [data owner]
   (reify
