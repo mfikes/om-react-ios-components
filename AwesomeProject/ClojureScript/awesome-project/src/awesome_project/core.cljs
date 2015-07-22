@@ -16,20 +16,53 @@
 (defn text [opts & children]
   (apply js/React.createElement js/React.Text (clj->js opts) children))
 
+(def Swiper (js/require "react-native-swiper/dist/index"))
+(defn swiper [opts & children]
+  (apply js/React.createElement Swiper (clj->js opts) children))
 
 ;; Set up our Om UI
 
 (defonce app-state (atom {:text "Hello from ClojureScript!"}))
 
+(def wrapper-style {})
+
+(def slide1-style {:flex            1
+                   :justifyContent  "center"
+                   :alignItems      "center"
+                   :backgroundColor "#9DD6EB"})
+
+(def slide2-style {:flex            1
+                   :justifyContent  "center"
+                   :alignItems      "center"
+                   :backgroundColor "#97CAE5"})
+
+(def slide3-style {:flex            1
+                   :justifyContent  "center"
+                   :alignItems      "center"
+                   :backgroundColor "#92BBD9"})
+
+
+(def text-style {:color      "#fff"
+                 :fontSize   30
+                 :fontWeight "bold"})
+
 (defn widget [data owner]
   (reify
     om/IRender
     (render [this]
-      (view {:style {:flexDirection "row" :margin 40 :backgroundColor "cyan"}}
-        (text nil (:text data))))))
+      (swiper {:style wrapper-style}
+        (view {:style slide1-style}
+          (text {:style text-style}
+            "Hello Swiper"))
+        (view {:style slide2-style}
+          (text {:style text-style}
+            "Beautiful"))
+        (view {:style slide3-style}
+          (text {:style text-style}
+            "And simple"))))))
 
 (om/root widget app-state {:target 1})
 
-(defn ^:export init []  
+(defn ^:export init []
   ((fn render []
      (.requestAnimationFrame js/window render))))

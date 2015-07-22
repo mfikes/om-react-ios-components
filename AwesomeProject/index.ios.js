@@ -12,6 +12,8 @@ var {
   View,
 } = React;
 
+var Swiper = require('react-native-swiper')
+
 var AwesomeProject = React.createClass({
   render: function() {
     return (
