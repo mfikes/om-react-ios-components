@@ -16,10 +16,10 @@
 (defn text [opts & children]
   (apply js/React.createElement js/React.Text (clj->js opts) children))
 
-(def Swiper (js/require "react-native-swiper/dist/index"))
+(def swiper-type (js/require "react-native-swiper/dist/index"))
 (defn swiper [opts & children]
   (apply js/React.createElement
-    Swiper (clj->js opts) children))
+    swiper-type (clj->js opts) children))
 
 ;; Set up our Om UI
 
